@@ -1,1 +1,132 @@
-<h1>DOM Play</h1>
+<html>
+<head>
+<style type="text/css">
+    * {padding:0; margin:0;}
+		html {background-color:navy;}
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			max-width:960px; /* keeps from getting too large on wide screen */
+			width:90%; /* shrink to fit screen */
+			margin:auto; /* center in html element */
+			background-color: orange;
+			padding:20px;
+			min-height:100%; /* keeps from getting too large on wide screen */
+			}
+		img.flexible {
+			display:inline-block;
+			padding:20px;
+			max-width:300px; /* actual size of image */
+			width:33%; /* approximate size taken on screen in maximum view */
+		}
+		p {margin:10px;}
+		h1,h2,h3,h4,h5,h6{
+			font-weight:normal;
+			margin:10px;
+			}
+		h1.masthead {margin-top:0;}
+		footer {
+			text-align:center;
+			clear:both; /* ride below all items */
+			}
+		nav{
+			text-align:center; /* centers the nav */
+		}
+		
+		nav ul {
+				list-style:none; /* removes the bullets */
+			}
+		nav ul li
+			{
+				display:inline-block; /* makes horizontal, but able to declare margins */
+				margin:0 2%; /* margin left-right, gets smaller as necessary */
+			}
+		nav a:hover{
+			text-decoration: none;
+		}
+        div#play {
+            font-size: 20px;
+        }
+</style>
+</head>
+<body>
+    <header>
+        <h1>DOM Play</h1>
+    </header>
+    <main>
+        <header>
+            <h3>A JavaScript Example by Justin Cho</h3>
+        </header>
+
+        <p>This web page uses JavaScript to highlight lines of texts from a script when a user clicks it.</p>
+        <p>
+            <ol>
+                <li>With a single click, highlight (bold or otherwise) all lines for a specific actor in a play</li>
+                <li>Un-highlight (normal or otherwise) all lines from all other actors in the play</li>
+                <li>The function(s) created to do the work must accommodate any number of actors, and any number of additional lines added to the page</li>
+                <li>The page must do the work without page re-loads (i.e. it must be done via JavaScript and the DOM)</li>
+                <li>The page may not use a third party API (jQuery, for example)</li>
+                <li>HTML "hooks" may be added to the page, meaning you can edit the HTML to enable your scripts to perform properly</li>
+            </ol>
+        </p>
+
+        <div id="play">
+        <p><span data-actor="meryl">Meryl: Why don't I make you some of this new
+                    Mococoa Drink?  All natural.  Cocoa beans
+                    from the upper slopes of Mount Nicaragua.
+                    No artificial sweeteners--</span></p>
+        <p><span data-actor="truman">Truman: --What the hell are you talking about?!</span></p>
+        <p><span data-actor="meryl">Mery;: I've tasted other cocoas.  This is the best.</span></p>
+        <p><span data-actor="truman">Truman: What the hell has that got to do with 
+            anything?  Tell me what's happening?!</span></p>
+        <p><span data-actor="meryl">Meryl: You're having a nervous breakdown, that's
+            what's happening.
+    </span></p>
+        <p><span data-actor="truman">Truman: You're part of this, aren't you?!</span></p>
+        <p><span data-actor="meryl">Meryl: Truman, you're scaring me!</span></p>
+        <p><span data-actor="truman">Truman: No, you're scaring me, Meryl!</span></p>
+        <p><span data-actor="truman">Truman: Stop this now.  I'll do it.  I swear.</span></p>
+        <p><span data-actor="meyrl">Meryl: Do something...</span></p>
+        <p><span data-actor="truman">Truman: Who were you talking to?!</span></p>
+        <p><span data-actor="meryl">Meryl: You're the one talking to the walls!</span></p>
+        <p><span data-actor="truman">Truman: No.  You said, "Do something."  Who were
+            you talking to?  Tell me!</span></p>
+        <p><span data-actor="meryl">Meryl: Truman, stop it!</span></p>
+        <p><span data-actor="truman">Truman: Right on time.  Cops must be telephatic.</span></p>
+        <p><span data-actor="truman">Truman: Stay where you are!</span></p>
+        <p><span data-actor="marlon">Marlon: Truman?  It's me, Marlon.  I need to talk
+            to you.</span></p>
+        <p><span data-actor="meryl">Meryl: How can anyone expect me to carry on
+            under these conditions?  This 
+            is...unprofessional.</span></p>
+        </div>
+        </main>
+        <script>
+
+    //we're using the CSS descendent selector to access the spans
+    const spans = document.querySelectorAll('div#play span');
+
+    console.log(spans);
+
+        for(const mySpan of spans){
+
+            mySpan.addEventListener("click", function(ev){
+                //alert(mySpan.dataset.actor);
+                highlightActor(mySpan.dataset.actor);
+                
+            });
+        }
+
+        function highlightActor(myActor){
+
+            for(const mySpan of spans){
+
+            if(myActor == mySpan.dataset.actor){
+                mySpan.style.backgroundColor = 'yellow';
+            }else{
+                mySpan.style.backgroundColor = 'orange';
+            }
+          }
+        }
+    </script>
+</body>
+</html>
